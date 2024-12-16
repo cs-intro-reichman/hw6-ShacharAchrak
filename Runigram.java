@@ -128,8 +128,17 @@ public class Runigram {
 	 * The image is scaled (resized) to have the given width and height.
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
-		//// Replace the following statement with your code
-		return null;
+		int ogHeight = image.length;
+		int ogWidth = image[0].length;
+		Color[][] scaledImage = new Color[height][width];
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				int sourceRow = (int) (i * ogHeight / (double) height);
+				int sourceCol = (int) (j * ogWidth / (double) width);
+				scaledImage[i][j] = image[sourceRow][sourceCol];
+			}
+		}	
+		return scaledImage;
 	}
 	
 	/**
