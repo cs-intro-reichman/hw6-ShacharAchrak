@@ -148,8 +148,10 @@ public class Runigram {
 	 * values in the two input color.
 	 */
 	public static Color blend(Color c1, Color c2, double alpha) {
-		//// Replace the following statement with your code
-		return null;
+		int r = (int) Math.round(alpha * c1.getRed() + (1 - alpha) * c2.getRed());
+		int g = (int) Math.round(alpha * c1.getGreen() + (1 - alpha) * c2.getGreen());
+		int b = (int) Math.round(alpha * c1.getBlue() + (1 - alpha) * c2.getBlue());
+		return new Color(r,b,g);
 	}
 	
 	/**
