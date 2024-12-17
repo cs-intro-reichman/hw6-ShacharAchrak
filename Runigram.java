@@ -161,8 +161,16 @@ public class Runigram {
 	 * The two images must have the same dimensions.
 	 */
 	public static Color[][] blend(Color[][] image1, Color[][] image2, double alpha) {
-		//// Replace the following statement with your code
-		return null;
+		int rows = image1.length;
+		int cols = image1[0].length;
+		Color[][] blendedImage = new Color[rows][cols];
+		
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				blendedImage[i][j] = blend(image1[i][j], image2[i][j], alpha);
+			}
+		}
+		return blendedImage;
 	}
 
 	/**
@@ -172,8 +180,22 @@ public class Runigram {
 	 * of the source image.
 	 */
 	public static void morph(Color[][] source, Color[][] target, int n) {
-		//// Replace this comment with your code
+		Color[][] scaledTarget = scaled(target, source[0].length, source.length);
+		for (int step = 0; step <= n; step++) {
+			double alpha = step / (double) n;
+			Color[][] morphedImage = new Color[source.length][source[0].length];
+
+			for (int i = 0; i < source.length; i++) {
+				for (int j = 0; j < source[0].length; j++) {
+					morphedImage[i][j] = blend(source[i][j], scaledTarget[i][j], alpha);
+				}
+			}
+			setCanvas(morphedImage);
+            display(morphedImage);
+			StdDraw.pause(100); 
+		}
 	}
+	
 	
 	/** Creates a canvas for the given image. */
 	public static void setCanvas(Color[][] image) {
